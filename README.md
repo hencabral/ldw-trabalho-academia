@@ -5,4 +5,5 @@ mesmos padrões do roteiro apresentado em aula. Para fins de padronização, as 
 /api/alunos
 /api/instrutores
 /api/gruposmusculares
-/api/tiposexerc
+/api/tiposexercicios
+/api/fichas

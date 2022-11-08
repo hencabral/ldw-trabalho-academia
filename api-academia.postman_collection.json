@@ -1,0 +1,790 @@
+{
+	"info": {
+		"_postman_id": "8f1a7092-706c-4765-bf8b-49c0c8fc28be",
+		"name": "api-academia",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13721004"
+	},
+	"item": [
+		{
+			"name": "alunos",
+			"item": [
+				{
+					"name": "createAluno",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Martineli\",\r\n    \"dataNascimento\": \"11/20/2000\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"martineli@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\",\r\n    \"fichas\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/alunos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"alunos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAluno",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/alunos/6369cd3f5727e69f78fe8664",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"alunos",
+								"6369cd3f5727e69f78fe8664"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getAlunos",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/alunos/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"alunos",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateAluno",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Luiz Henrique Zabral\",\r\n    \"dataNascimento\": \"08/16/2000\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"luizz@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\",\r\n    \"fichas\": []\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/alunos/6369cd185727e69f78fe8660",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"alunos",
+								"6369cd185727e69f78fe8660"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteAluno",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/alunos/6369c27341bc7a31d34d9577",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"alunos",
+								"6369c27341bc7a31d34d9577"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "fichas",
+			"item": [
+				{
+					"name": "createFicha",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"aluno\": {\r\n        \"_id\": \"6369cd3f5727e69f78fe8664\"\r\n    },\r\n    \"instrutor\": {\r\n        \"_id\": \"6369cdbc5727e69f78fe8676\"\r\n    },\r\n    \"ativa\": true,\r\n    \"dataInicio\": \"11/08/2022\",\r\n    \"exercicios\": [],\r\n    \"execucoes\": [\r\n        {\r\n            \"dataHoraInicio\": \"11/08/2022\",\r\n            \"dataHoraFim\": \"11/08/2022\",\r\n            \"observacoes\": \"\"\r\n        }\r\n    ]\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/fichas/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"fichas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFicha",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/fichas/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"fichas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getFichas",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/fichas/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"fichas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateFicha",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Matheus\",\r\n    \"dataNascimento\": \"07/07/2006\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"matheus@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/fichas/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"fichas",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteFicha",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/fichas/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"fichas",
+								""
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gruposmusculares",
+			"item": [
+				{
+					"name": "createGrupoMuscular",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Tríceps\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/gruposmusculares/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gruposmusculares",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGrupoMuscular",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/gruposmusculares/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gruposmusculares",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getGrupoMuscular",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/gruposmusculares/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gruposmusculares",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateGrupoMuscular",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Costas\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/gruposmusculares/6369c73b41bc7a31d34d958d",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gruposmusculares",
+								"6369c73b41bc7a31d34d958d"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteGrupoMuscular",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/gruposmusculares/6369c73b41bc7a31d34d958d",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"gruposmusculares",
+								"6369c73b41bc7a31d34d958d"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "instrutores",
+			"item": [
+				{
+					"name": "createInstrutor",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Bernardo\",\r\n    \"dataNascimento\": \"07/07/2006\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"bernardo@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/instrutores/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"instrutores",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getInstrutor",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/instrutores/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"instrutores",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getInstrutores",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/instrutores/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"instrutores",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateInstrutor",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Matheus\",\r\n    \"dataNascimento\": \"07/07/2006\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"matheus@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/instrutores/6369c62541bc7a31d34d9582",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"instrutores",
+								"6369c62541bc7a31d34d9582"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteInstrutor",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/instrutores/6369c62541bc7a31d34d9582",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"instrutores",
+								"6369c62541bc7a31d34d9582"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "tiposexercicio",
+			"item": [
+				{
+					"name": "createTipoExercicio",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Supino\",\r\n    \"pesoMinimo\": 10,\r\n    \"pesoMaximo\": 100,\r\n    \"degrauPeso\": 10,\r\n    \"grupoMuscular\":{\r\n        \"_id\": \"6369caab5727e69f78fe8642\",\r\n        \"nome\": \"Peito\"\r\n    }\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/tiposexercicios/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tiposexercicios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTipoExercicio",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/tiposexercicios/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tiposexercicios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getTiposExercicios",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/tiposexercicios/",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tiposexercicios",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTipoExercicio",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nome\": \"Matheus\",\r\n    \"dataNascimento\": \"07/07/2006\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"matheus@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/tiposexercicios/6369c62541bc7a31d34d9582",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tiposexercicios",
+								"6369c62541bc7a31d34d9582"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTipoExercicio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "localhost:8080/api/tiposexercicios/6369cbb35727e69f78fe865a",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"api",
+								"tiposexercicios",
+								"6369cbb35727e69f78fe865a"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
