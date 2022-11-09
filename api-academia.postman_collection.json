@@ -16,7 +16,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Martineli\",\r\n    \"dataNascimento\": \"11/20/2000\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"martineli@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\",\r\n    \"fichas\": []\r\n}",
+							"raw": "{\r\n    \"nome\": \"Pedro\",\r\n    \"dataNascimento\": \"2000-11-20T02:00:00.000Z\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"pedro@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\",\r\n    \"fichas\": []\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -109,7 +109,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"nome\": \"Luiz Henrique Zabral\",\r\n    \"dataNascimento\": \"08/16/2000\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"luizz@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": \"true\",\r\n    \"fichas\": []\r\n}",
+							"raw": "{\r\n    \"_id\": \"6369cd3f5727e69f78fe8664\",\r\n    \"nome\": \"Martineli da Silva\",\r\n    \"dataNascimento\": \"2000-11-20T02:00:00.000Z\",\r\n    \"sexo\": \"M\",\r\n    \"email\": \"martineli@email.com\",\r\n    \"senha\": \"123\",\r\n    \"ativo\": true,\r\n    \"fichas\": [\r\n        {\r\n            \"_id\": \"6369cf7f5727e69f78fe868b\"\r\n        }\r\n    ],\r\n    \"createdAt\": \"2022-11-08T03:30:07.562Z\",\r\n    \"updatedAt\": \"2022-11-08T03:30:07.562Z\",\r\n    \"__v\": 0\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -117,7 +117,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/alunos/6369cd185727e69f78fe8660",
+							"raw": "localhost:8080/api/alunos/6369cd3f5727e69f78fe8664",
 							"host": [
 								"localhost"
 							],
@@ -125,7 +125,7 @@
 							"path": [
 								"api",
 								"alunos",
-								"6369cd185727e69f78fe8660"
+								"6369cd3f5727e69f78fe8664"
 							]
 						}
 					},
@@ -146,7 +146,7 @@
 							}
 						},
 						"url": {
-							"raw": "localhost:8080/api/alunos/6369c27341bc7a31d34d9577",
+							"raw": "localhost:8080/api/alunos/6369cd2f5727e69f78fe8662",
 							"host": [
 								"localhost"
 							],
@@ -154,7 +154,7 @@
 							"path": [
 								"api",
 								"alunos",
-								"6369c27341bc7a31d34d9577"
+								"6369cd2f5727e69f78fe8662"
 							]
 						}
 					},
@@ -172,7 +172,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n    \"aluno\": {\r\n        \"_id\": \"6369cd3f5727e69f78fe8664\"\r\n    },\r\n    \"instrutor\": {\r\n        \"_id\": \"6369cdbc5727e69f78fe8676\"\r\n    },\r\n    \"ativa\": true,\r\n    \"dataInicio\": \"11/08/2022\",\r\n    \"exercicios\": [],\r\n    \"execucoes\": [\r\n        {\r\n            \"dataHoraInicio\": \"11/08/2022\",\r\n            \"dataHoraFim\": \"11/08/2022\",\r\n            \"observacoes\": \"\"\r\n        }\r\n    ]\r\n}",
+							"raw": "{\r\n    \"aluno\": {\r\n        \"_id\": \"6369cd3f5727e69f78fe8664\"\r\n    },\r\n    \"instrutor\": {\r\n        \"_id\": \"6369cdbc5727e69f78fe8676\"\r\n    },\r\n    \"ativa\": true,\r\n    \"dataInicio\": \"11/08/2022\",\r\n    \"exercicios\": [\r\n        {\r\n            \"tipo\": {\r\n                \"_id\": \"6369cedd5727e69f78fe8680\",\r\n                \"nome\": \"Supino\",\r\n                \"pesoMinimo\": 10,\r\n                \"pesoMaximo\": 100,\r\n                \"degrauPeso\": 10\r\n            },\r\n            \"ordem\": 1,\r\n            \"peso\": 10,\r\n            \"repeticoes\": 12,\r\n            \"series\": 4\r\n        }\r\n    ],\r\n    \"execucoes\": [\r\n        {\r\n            \"dataHoraInicio\": \"11/08/2022\",\r\n            \"dataHoraFim\": \"11/08/2022\",\r\n            \"observacoes\": \"\"\r\n        }\r\n    ]\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -383,7 +383,7 @@
 					"response": []
 				},
 				{
-					"name": "getGrupoMuscular",
+					"name": "getGruposMusculares",
 					"protocolProfileBehavior": {
 						"disableBodyPruning": true
 					},
