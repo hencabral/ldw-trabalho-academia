@@ -26,6 +26,10 @@ import TipoExercicio from "./pages/tipoExercicio/Listagem";
 import CadastroTipoExercicio from "./pages/tipoExercicio/Cadastro";
 import AlteraTipoExercicio from "./pages/tipoExercicio/Alteracao";
 
+import Ficha from "./pages/fichas/Listagem";
+import CadastroFicha from "./pages/fichas/Cadastro";
+import AlteraFicha from "./pages/fichas/Alteracao";
+
 const App = () => {
     return (
         <>
@@ -53,6 +57,11 @@ const App = () => {
                             <Route index element={<TipoExercicio />} />
                             <Route path="cadastrar" element={<CadastroTipoExercicio />} />
                             <Route path="alterar/:id" element={<AlteraTipoExercicio />} />
+                        </Route>
+                        <Route path="fichas">
+                            <Route index element={<Ficha />} />
+                            <Route path="cadastrar" element={<CadastroFicha />} />
+                            <Route path="alterar/:id" element={<AlteraFicha />} />
                         </Route>
                     </Route>
                     <Route path="/login" element={<Login />} />

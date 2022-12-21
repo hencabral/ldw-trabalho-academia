@@ -2,20 +2,20 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
-import TableTipoExercicio from "../../components/tipoExercicio/TabelaTipoExercicio";
+import TableFichas from "../../components/ficha/TableFicha";
 import { authHeader } from "../../services/authServices";
 
 import "./Listagem.css";
 
 const Listagem = () => {
-    const [tipoExercicios, setTipoExercicio] = useState([]);
+    const [fichas, setFichas] = useState([]);
     const [loading, setLoading] = useState(true);
 
-    const carregarExercicios = () => {
+    const carregarFichas = () => {
         axios
-            .get("http://localhost:8080/api/tiposexercicios", { headers: authHeader() })
+            .get("http://localhost:8080/api/fichas", { headers: authHeader() })
             .then((response) => {
-                setTipoExercicio(response.data);
+                setFichas(response.data);
                 setLoading(false);
             })
             .catch((error) => {
@@ -24,19 +24,19 @@ const Listagem = () => {
     };
 
     useEffect(() => {
-        carregarExercicios();
+        carregarFichas();
     }, []);
 
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Tipo Exercício</h1>
-                <Link to="/tiposexercicios/cadastrar" className="btn btn-primary">
+                <h1>Fichas</h1>
+                <Link to="/fichas/cadastrar" className="btn btn-primary">
                     Novo
                 </Link>
             </div>
             <hr />
-            {loading ? <Loading /> : <TableTipoExercicio tipoExercicios={tipoExercicios} setTipoExercicio={setTipoExercicio} />}
+            {loading ? <Loading /> : <TableFichas fichas={fichas} setFichas={setFichas} />}
         </>
     );
 };

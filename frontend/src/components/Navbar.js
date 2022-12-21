@@ -45,6 +45,9 @@ const Navbar = () => {
                             <NavLink to="/tiposexercicios" className="nav-link">
                                 Tipos Exercícios
                             </NavLink>
+                            <NavLink to="/fichas" className="nav-link">
+                                Fichas
+                            </NavLink>
                             <Link to="/logout" className="nav-link">
                                 Sair
                             </Link>

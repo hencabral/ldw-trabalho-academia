@@ -12,12 +12,12 @@ const FormFicha = ({ handleChange, inputs, errors, isNew }) => {
 
                 <div className="col-6 col-md-4">
                     <FormSelect
-                        field="ativo"
+                        field="ativa"
                         label="Situação"
                         placeholder="Selecione uma situação..."
                         onChange={handleChange}
-                        value={inputs?.ativo}
-                        error={errors?.ativo}
+                        value={inputs?.ativa}
+                        error={errors?.ativa}
                         options={[
                             { label: "Ativo", value: "true" },
                             { label: "Inativo", value: "false" },

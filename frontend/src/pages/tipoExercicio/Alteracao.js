@@ -5,7 +5,7 @@ import * as yup from "yup";
 import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import InformModal from "../../components/utils/InformModal";
-import FormTipoExercicio from "../../components/exercicio/FormTipoExercicio";
+import FormTipoExercicio from "../../components/tipoExercicio/FormTipoExercicio";
 import { authHeader } from "../../services/authServices";
 
 
@@ -23,10 +23,9 @@ const Alteracao = () => {
     //https://github.com/jquense/yup
     const validator = yup.object().shape({
         nome: yup.string().required("Nome é obrigatório."),
-        dataNascimento: yup.date().required("Data de nascimento é obrigatória."),
-        sexo: yup.string().oneOf(["M", "F", "O"], "Gênero está incorreto.").required("Gênero é obrigatório."),
-        email: yup.string().email("E-mail inválido.").required("E-mail é obrigatório."),
-        ativo: yup.boolean().required("Situação é obrigatória."),
+        pesoMinimo: yup.number().required("Peso mínimo é obrigatório."),
+        pesoMaximo: yup.number().required("Peso máximo é obrigatório."),
+        degrauPeso: yup.number().required("Degrou Peso é obrigatório."),
     });
 
     function handleChange(event) {

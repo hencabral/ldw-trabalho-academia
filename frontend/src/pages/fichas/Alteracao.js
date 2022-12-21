@@ -1,27 +1,28 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import FormFicha from "../../components/ficha/FormFicha";
 import InformModal from "../../components/utils/InformModal";
 import { authHeader } from "../../services/authServices";
-import FormTipoExercicio from "../../components/tipoExercicio/FormTipoExercicio";
 
-
-const Cadastro = () => {
+const Alteracao = () => {
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
     const [modal, setModal] = useState(undefined);
-
     const navigate = useNavigate();
+
+    const idFicha = useParams().id;
+    if (!idFicha) {
+        navigate("/listagem");
+    }
 
     //https://github.com/jquense/yup
     const validator = yup.object().shape({
-        nome: yup.string().required("Nome é obrigatório."),
-        pesoMinimo: yup.number().required("Peso mínimo é obrigatório."),
-        pesoMaximo: yup.number().required("Peso máximo é obrigatório."),
-        degrauPeso: yup.number().required("Degrou Peso é obrigatório."),
+        ativa: yup.boolean().required("Situação é obrigatória."),
+        dataInicio: yup.date().required("Data inicio é obrigatório."),
     });
 
     function handleChange(event) {
@@ -38,9 +39,9 @@ const Cadastro = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .post("http://localhost:8080/api/tiposexercicios", inputs, { headers: authHeader() })
+                    .put(`http://localhost:8080/api/fichas/${idFicha}`, inputs, { headers: authHeader() })
                     .then((response) => {
-                        if (response.status === 201) {
+                        if (response.status === 200) {
                             modal.show();
                         } else {
                             console.log(response);
@@ -60,12 +61,25 @@ const Cadastro = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/tiposexercicios");
+        navigate("/fichas");
     }
 
     useEffect(() => {
         const informModal = new bootstrap.Modal("#informModal", {});
         setModal(informModal);
+        setInputs({ ...inputs, id: idFicha });
+        axios
+            .get(`http://localhost:8080/api/fichas/${idFicha}`, { headers: authHeader() })
+            .then((response) => {
+                if (response.status === 200) {
+                    setInputs(response.data);
+                } else {
+                    console.log(response);
+                }
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }, []);
 
     useEffect(() => {
@@ -88,13 +102,13 @@ const Cadastro = () => {
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Novo Tipo de Exercícios</h1>
+                <h1>Alteração de Ficha</h1>
             </div>
             <hr />
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
-                <FormTipoExercicio handleChange={handleChange} inputs={inputs} errors={errors} isNew={true} />
+                <FormFicha handleChange={handleChange} inputs={inputs} errors={errors} />
                 <div className="mt-3">
-                    <Link to="/tiposexercicios" className="btn btn-secondary me-1">
+                    <Link to="/fichas" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">
@@ -102,9 +116,9 @@ const Cadastro = () => {
                     </button>
                 </div>
             </form>
-            <InformModal info="Tipo de exercício cadastrado com sucesso!" action={closeModalAndRedirect} />
+            <InformModal info="Ficha alterada com sucesso!" action={closeModalAndRedirect} />
         </>
     );
 };
 
-export default Cadastro;
+export default Alteracao;

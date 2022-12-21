@@ -4,9 +4,9 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import FormFicha from "../../components/ficha/FormFicha";
 import InformModal from "../../components/utils/InformModal";
 import { authHeader } from "../../services/authServices";
-import FormTipoExercicio from "../../components/tipoExercicio/FormTipoExercicio";
 
 
 const Cadastro = () => {
@@ -18,10 +18,8 @@ const Cadastro = () => {
 
     //https://github.com/jquense/yup
     const validator = yup.object().shape({
-        nome: yup.string().required("Nome é obrigatório."),
-        pesoMinimo: yup.number().required("Peso mínimo é obrigatório."),
-        pesoMaximo: yup.number().required("Peso máximo é obrigatório."),
-        degrauPeso: yup.number().required("Degrou Peso é obrigatório."),
+        ativa: yup.boolean().required("Situação é obrigatória."),
+        dataInicio: yup.date().required("Data inicio é obrigatório."),
     });
 
     function handleChange(event) {
@@ -38,7 +36,7 @@ const Cadastro = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .post("http://localhost:8080/api/tiposexercicios", inputs, { headers: authHeader() })
+                    .post("http://localhost:8080/api/fichas", inputs, { headers: authHeader() })
                     .then((response) => {
                         if (response.status === 201) {
                             modal.show();
@@ -60,7 +58,7 @@ const Cadastro = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/tiposexercicios");
+        navigate("/fichas");
     }
 
     useEffect(() => {
@@ -88,13 +86,13 @@ const Cadastro = () => {
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Novo Tipo de Exercícios</h1>
+                <h1>Nova Ficha</h1>
             </div>
             <hr />
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
-                <FormTipoExercicio handleChange={handleChange} inputs={inputs} errors={errors} isNew={true} />
+                <FormFicha handleChange={handleChange} inputs={inputs} errors={errors} isNew={true} />
                 <div className="mt-3">
-                    <Link to="/tiposexercicios" className="btn btn-secondary me-1">
+                    <Link to="/fichas" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">
@@ -102,7 +100,7 @@ const Cadastro = () => {
                     </button>
                 </div>
             </form>
-            <InformModal info="Tipo de exercício cadastrado com sucesso!" action={closeModalAndRedirect} />
+            <InformModal info="Ficha cadastrada com sucesso!" action={closeModalAndRedirect} />
         </>
     );
 };
