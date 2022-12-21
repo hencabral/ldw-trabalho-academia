@@ -8,6 +8,6 @@ router.post("/", verificarAtivo, createGrupoMuscular);
 router.put("/:id", verificarAtivo, updateGrupoMuscular);
 router.delete("/:id", verificarAtivo, deleteGrupoMuscular);
 router.get("/:id", verificarToken, getGrupoMuscular);
-router.get("/", verificarToken, getGruposMusculares);
+router.get("/", getGruposMusculares);
 
 export default router;

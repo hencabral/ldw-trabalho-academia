@@ -36,6 +36,15 @@ const Navbar = () => {
                                     Ativos
                                 </NavLink>
                             )}
+                            <NavLink to="/gruposmusculares" className="nav-link">
+                                Grupos Musculares
+                            </NavLink>
+                            <NavLink to="/instrutores" className="nav-link">
+                                Instrutores
+                            </NavLink>
+                            <NavLink to="/tiposexercicios" className="nav-link">
+                                Tipos Exercícios
+                            </NavLink>
                             <Link to="/logout" className="nav-link">
                                 Sair
                             </Link>

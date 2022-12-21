@@ -1,8 +1,10 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import ConfirmModal from "../utils/ConfirmModal";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import ConfirmModal from "../utils/ConfirmModal";
+import InformModal from "../utils/InformModal";
+import { authHeader } from "../../services/authServices";
 
 const TableAlunos = ({ alunos, setAlunos }) => {
     const [alunoExcluir, setAlunoExcluir] = useState(null);
@@ -16,11 +18,14 @@ const TableAlunos = ({ alunos, setAlunos }) => {
     }
 
     function excluirAluno() {
-        axios.delete(`http://localhost:8080/api/alunos/${alunoExcluir._id}`)
+        axios
+            .delete(`http://localhost:8080/api/alunos/${alunoExcluir._id}`, { headers: authHeader() })
             .then((data) => {
                 const alunosAtualizados = alunos.filter((aluno) => aluno._id !== alunoExcluir._id);
                 setAlunos(alunosAtualizados);
                 modal.hide();
+                const informModal = new bootstrap.Modal("#informModal", {});
+                informModal.show();
             })
             .catch((error) => {
                 console.log(error);
@@ -37,6 +42,7 @@ const TableAlunos = ({ alunos, setAlunos }) => {
                     <tr>
                         <th>Nome</th>
                         <th>Data Nascimento</th>
+                        <th>Telefone</th>
                         <th>E-mail</th>
                         <th>Sexo</th>
                         <th>Situação</th>
@@ -47,7 +53,8 @@ const TableAlunos = ({ alunos, setAlunos }) => {
                     {alunos.map((aluno) => (
                         <tr key={aluno._id}>
                             <td>{aluno.nome}</td>
-                            <td>{aluno.dataNascimento}</td>
+                            <td>{new Date(aluno.dataNascimento.substring(0, 10) + "T12:00:00").toLocaleDateString()}</td>
+                            <td>{aluno.telefone}</td>
                             <td>{aluno.email}</td>
                             <td>{aluno.sexo === "M" ? "Masculino" : "Feminino"}</td>
                             <td>{aluno.ativo ? "Ativo" : "Inativo"}</td>
@@ -64,7 +71,8 @@ const TableAlunos = ({ alunos, setAlunos }) => {
                 </tbody>
             </table>
 
-            <ConfirmModal question={`Deseja realmente excluir o aluno ${alunoExcluir?.nome}?`} action={excluirAluno} />
+            <ConfirmModal question={`Deseja realmente excluir o aluno <b>${alunoExcluir?.nome}</b>?`} action={excluirAluno} />
+            <InformModal info={`Aluno <b>${alunoExcluir?.nome}</b> excluído com sucesso.`} />
         </>
     );
 };

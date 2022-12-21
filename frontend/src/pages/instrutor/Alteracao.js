@@ -41,7 +41,7 @@ const Alteracao = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .put(`http://localhost:8080/api/instrutors/${idInstrutor}`, inputs)
+                    .put(`http://localhost:8080/api/instrutores/${idInstrutor}`, inputs)
                     .then((response) => {
                         if (response.status === 200) {
                             modal.show();
@@ -63,7 +63,7 @@ const Alteracao = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/instrutors");
+        navigate("/instrutores");
     }
 
     useEffect(() => {
@@ -71,7 +71,7 @@ const Alteracao = () => {
         setModal(informModal);
         setInputs({ ...inputs, id: idInstrutor });
         axios
-            .get(`http://localhost:8080/api/instrutors/${idInstrutor}`)
+            .get(`http://localhost:8080/api/instrutores/${idInstrutor}`)
             .then((response) => {
                 if (response.status === 200) {
                     setInputs(response.data);
@@ -110,7 +110,7 @@ const Alteracao = () => {
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
                 <FormInstrutor handleChange={handleChange} inputs={inputs} errors={errors} />
                 <div className="mt-3">
-                    <Link to="/instrutors" className="btn btn-secondary me-1">
+                    <Link to="/instrutores" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">

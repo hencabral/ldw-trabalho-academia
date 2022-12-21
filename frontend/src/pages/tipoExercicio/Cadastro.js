@@ -1,26 +1,28 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { Link, useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
-import FormGrupoMuscular from "../../components/grupomuscular/FormGrupoMuscular";
 import InformModal from "../../components/utils/InformModal";
+import { authHeader } from "../../services/authServices";
+import FormTipoExercicio from "../../components/exercicio/FormTipoExercicio";
 
-const Alteracao = () => {
+
+const Cadastro = () => {
     const [inputs, setInputs] = useState({});
     const [errors, setErrors] = useState({});
     const [modal, setModal] = useState(undefined);
-    const navigate = useNavigate();
 
-    const idAluno = useParams().id;
-    if (!idAluno) {
-        navigate("/listagem");
-    }
+    const navigate = useNavigate();
 
     //https://github.com/jquense/yup
     const validator = yup.object().shape({
-        nome: yup.string().required("Nome é obrigatório.")
+        nome: yup.string().required("Nome é obrigatório."),
+        dataNascimento: yup.date().required("Data de nascimento é obrigatória."),
+        sexo: yup.string().oneOf(["M", "F", "O"], "Gênero está incorreto.").required("Gênero é obrigatório."),
+        email: yup.string().email("E-mail inválido.").required("E-mail é obrigatório."),
+        ativo: yup.boolean().required("Situação é obrigatória."),
     });
 
     function handleChange(event) {
@@ -37,9 +39,9 @@ const Alteracao = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .put(`http://localhost:8080/api/gruposmusculares/${idAluno}`, inputs)
+                    .post("http://localhost:8080/api/tiposexercicios", inputs, { headers: authHeader() })
                     .then((response) => {
-                        if (response.status === 200) {
+                        if (response.status === 201) {
                             modal.show();
                         } else {
                             console.log(response);
@@ -59,25 +61,12 @@ const Alteracao = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/gruposmusculares");
+        navigate("/tiposexercicios");
     }
 
     useEffect(() => {
         const informModal = new bootstrap.Modal("#informModal", {});
         setModal(informModal);
-        setInputs({ ...inputs, id: idAluno });
-        axios
-            .get(`http://localhost:8080/api/gruposmusculares/${idAluno}`)
-            .then((response) => {
-                if (response.status === 200) {
-                    setInputs(response.data);
-                } else {
-                    console.log(response);
-                }
-            })
-            .catch((error) => {
-                console.log(error);
-            });
     }, []);
 
     useEffect(() => {
@@ -100,13 +89,13 @@ const Alteracao = () => {
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Alteração do Grupo Muscular</h1>
+                <h1>Novo Tipo de Exercícios</h1>
             </div>
             <hr />
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
-                <FormGrupoMuscular handleChange={handleChange} inputs={inputs} errors={errors} />
+                <FormTipoExercicio handleChange={handleChange} inputs={inputs} errors={errors} isNew={true} />
                 <div className="mt-3">
-                    <Link to="/gruposmusculares" className="btn btn-secondary me-1">
+                    <Link to="/tiposexercicios" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">
@@ -114,9 +103,9 @@ const Alteracao = () => {
                     </button>
                 </div>
             </form>
-            <InformModal info="Grupo Muscular alterado com sucesso!" action={closeModalAndRedirect} />
+            <InformModal info="Tipo de exercício cadastrado com sucesso!" action={closeModalAndRedirect} />
         </>
     );
 };
 
-export default Alteracao;
+export default Cadastro;

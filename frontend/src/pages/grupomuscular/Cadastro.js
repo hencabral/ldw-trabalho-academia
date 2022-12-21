@@ -4,8 +4,10 @@ import { Link, useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
-import FormGrupoMuscular from "../../components/aluno/FormGrupoMuscular";
+import FormGrupoMuscular from "../../components/grupomuscular/FormGrupoMuscular";
 import InformModal from "../../components/utils/InformModal";
+import { authHeader } from "../../services/authServices";
+
 
 const Cadastro = () => {
     const [inputs, setInputs] = useState({});
@@ -33,7 +35,7 @@ const Cadastro = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .post("http://localhost:8080/api/grupomuscular", inputs)
+                    .post("http://localhost:8080/api/gruposmusculares", inputs, { headers: authHeader() })
                     .then((response) => {
                         if (response.status === 201) {
                             modal.show();
@@ -55,7 +57,7 @@ const Cadastro = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/grupomuscular");
+        navigate("/gruposmusculares");
     }
 
     useEffect(() => {
@@ -83,13 +85,13 @@ const Cadastro = () => {
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Novo Aluno</h1>
+                <h1>Novo Grupo Muscular</h1>
             </div>
             <hr />
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
                 <FormGrupoMuscular handleChange={handleChange} inputs={inputs} errors={errors} isNew={true} />
                 <div className="mt-3">
-                    <Link to="/grupomuscular" className="btn btn-secondary me-1">
+                    <Link to="/gruposmusculares" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">
@@ -97,7 +99,7 @@ const Cadastro = () => {
                     </button>
                 </div>
             </form>
-            <InformModal info="Aluno cadastrado com sucesso!" action={closeModalAndRedirect} />
+            <InformModal info="Grupo Muscular cadastrado com sucesso!" action={closeModalAndRedirect} />
         </>
     );
 };

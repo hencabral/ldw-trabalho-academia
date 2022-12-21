@@ -4,10 +4,10 @@ import { verificarAtivo, verificarToken } from "../utils/verificarToken.js";
 
 const router = express.Router();
 
-router.post("/", verificarAtivo, createInstrutor);
-router.put("/:id", verificarAtivo, updateInstrutor);
-router.delete("/:id", verificarAtivo, deleteInstrutor);
-router.get("/:id", verificarToken, getInstrutor);
-router.get("/", verificarToken, getInstrutores);
+router.post("/", createInstrutor);
+router.put("/:id", updateInstrutor);
+router.delete("/:id", deleteInstrutor);
+router.get("/:id", getInstrutor);
+router.get("/", getInstrutores);
 
 export default router;

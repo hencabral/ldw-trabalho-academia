@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/", verificarAtivo, createTipoExercicio);
 router.put("/:id", verificarAtivo, updateTipoExercicio);
 router.delete("/:id", verificarAtivo, deleteTipoExercicio);
-router.get("/:id", verificarToken, getTipoExercicio);
-router.get("/", verificarToken, getTiposExercicios);
+router.get("/:id", getTipoExercicio);
+router.get("/", getTiposExercicios);
 
 export default router;

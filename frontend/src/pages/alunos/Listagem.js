@@ -3,6 +3,8 @@ import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import Loading from "../../components/Loading";
 import TableAlunos from "../../components/aluno/TableAlunos";
+import { authHeader } from "../../services/authServices";
+
 import "./Listagem.css";
 
 const Listagem = () => {
@@ -11,8 +13,9 @@ const Listagem = () => {
 
     const carregarAlunos = () => {
         axios
-            .get("http://localhost:8080/api/alunos")
+            .get("http://localhost:8080/api/alunos", { headers: authHeader() })
             .then((response) => {
+                console.log(response.data);
                 setAlunos(response.data);
                 setLoading(false);
             })

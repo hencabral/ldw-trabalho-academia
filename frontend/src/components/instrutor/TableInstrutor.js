@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import ConfirmModal from "../utils/ConfirmModal";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
+import { authHeader } from "../../services/authServices";
+
 
 const TableInstrutor = ({ instrutors, setInstrutor }) => {
     const [instrutorExcluir, setInstrutorExcluir] = useState(null);
@@ -16,7 +18,7 @@ const TableInstrutor = ({ instrutors, setInstrutor }) => {
     }
 
     function excluirInstrutor() {
-        axios.delete(`http://localhost:8080/api/instrutors/${instrutorExcluir._id}`)
+        axios.delete(`http://localhost:8080/api/instrutores/${instrutorExcluir._id}`, { headers: authHeader() })
             .then((data) => {
                 const instrutorsAtualizados = instrutors.filter((instrutor) => instrutor._id !== instrutorExcluir._id);
                 setInstrutor(instrutorsAtualizados);
@@ -52,7 +54,7 @@ const TableInstrutor = ({ instrutors, setInstrutor }) => {
                             <td>{instrutor.sexo === "M" ? "Masculino" : "Feminino"}</td>
                             <td>{instrutor.ativo ? "Ativo" : "Inativo"}</td>
                             <td>
-                                <Link className="btn btn-sm btn-warning me-1" to={`/instrutors/alterar/${instrutor._id}`}>
+                                <Link className="btn btn-sm btn-warning me-1" to={`/instrutores/alterar/${instrutor._id}`}>
                                     <i className="bi bi-pen"></i>
                                 </Link>
                                 <button className="btn btn-sm btn-danger" onClick={() => confirmarExclusao(instrutor)}>

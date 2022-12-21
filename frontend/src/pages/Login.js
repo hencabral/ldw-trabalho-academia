@@ -1,37 +1,54 @@
 import * as yup from "yup";
 import { useState } from "react";
-import { redirect, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import FormInput from "../components/utils/FormInput";
 import FormCheckbox from "../components/utils/FormCheckbox";
-import { isAuthenticated, getUser, authHeader, login } from "../services/authServices";
-import axios from "axios";
+import { login } from "../services/authServices";
 
 const Login = () => {
-    const [email, setEmail] = useState("");
-    const [senha, setSenha] = useState("");
+    const [inputs, setInputs] = useState({ email: "", senha: "", lembrar: false });
     const [errors, setErrors] = useState({});
 
     const navigate = useNavigate();
 
+    const validator = yup.object().shape({
+        email: yup.string().email("E-mail inválido.").required("E-mail é obrigatório."),
+        senha: yup.string().min(6, "Senha deve ter pelo menos 6 caracteres.").max(12, "Senha deve ter no máximo 12 caracteres.").required("Senha é obrigatória."),
+        lembrar: yup.boolean().required('A caixa "Lembrar de mim" deve ser informada.'),
+    });
+
     function handleChange(event) {
-        const { name, value } = event.target;
-        switch (name) {
-            case "email":
-                setEmail(value);
-                break;
-            case "senha":
-                setSenha(value);
-                break;
-            default:
-                break;
+        //rawValue é o valor sem máscara e value é o valor com máscara
+        if (event.target.type === "checkbox") {
+            const value = event.target.checked;
+            const name = event.target.name;
+            setInputs({ ...inputs, [name]: value });
+        } else {
+            const value = event.target.rawValue ? event.target.rawValue : event.target.value;
+            const name = event.target.name;
+            setInputs({ ...inputs, [name]: value });
         }
     }
 
-     async function handleSubmit(event) {
+    function handleSubmit(event) {
         event.preventDefault();
-        login(email, senha)
-        
-     }
+        validator
+            .validate(inputs, { abortEarly: false })
+            .then(async () => {
+                setErrors({});
+                if (await login(inputs.email, inputs.senha, inputs.lembrar)) {
+                    navigate("/alunos");
+                } else {
+                    setErrors({ email: "Usuário ou senha inválidos." });
+                }
+            })
+            .catch((error) => {
+                setErrors({});
+                error.inner.forEach((err) => {
+                    setErrors((prevErrors) => ({ ...prevErrors, [err.path]: err.message }));
+                });
+            });
+    }
 
     return (
         <>
@@ -46,14 +63,15 @@ const Login = () => {
                         <h2>Login</h2>
                     </div>
 
-                    <form onSubmit={handleSubmit} noValidate autoComplete="on">
+                    <form onSubmit={handleSubmit} noValidate autoComplete="off">
                         <div>
-                            <FormInput type="email" field="email" placeholder="fulano@email.com" label="E-mail" onChange={handleChange} value={email} error={errors?.email} />
+                            <FormInput type="email" field="email" placeholder="fulano@email.com" label="E-mail" onChange={handleChange} value={inputs?.email} error={errors?.email} />
                         </div>
                         <div>
-                            <FormInput type="password" field="senha" placeholder="Senha" label="Senha" onChange={handleChange} value={senha} error={errors?.senha} />
+                            <FormInput type="password" field="senha" placeholder="Senha" label="Senha" onChange={handleChange} value={inputs?.senha} error={errors?.senha} />
                         </div>
                         <div>
+                            <FormCheckbox field="lembrar" label="Lembrar de mim" onChange={handleChange} value={inputs?.lembrar} />
                         </div>
                         <div className="mt-3">
                             <button type="submit" className="btn btn-dark btn-lg w-100">

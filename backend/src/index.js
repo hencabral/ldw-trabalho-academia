@@ -24,9 +24,9 @@ app.use(express.urlencoded({ extended: true }))
 app.use(errorHandling)
 
 app.use("/api/alunos", verificarToken, alunoRoutes)
-app.use("/api/instrutores", instrutorRoutes)
-app.use("/api/gruposmusculares", grupoMuscularRoutes)
-app.use("/api/tiposexercicios", tipoExercicioRoutes)
+app.use("/api/instrutores", verificarToken, instrutorRoutes)
+app.use("/api/gruposmusculares", verificarToken, grupoMuscularRoutes)
+app.use("/api/tiposexercicios", verificarToken, tipoExercicioRoutes)
 app.use("/api/fichas", fichaRoutes)
 app.use("/api/auth", routeAuth)
 

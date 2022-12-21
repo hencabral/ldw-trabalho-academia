@@ -4,8 +4,10 @@ import { Link, useNavigate, useParams } from "react-router-dom";
 import * as yup from "yup";
 import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
-import FormGrupoMuscular from "../../components/grupomuscular/FormGrupoMuscular";
 import InformModal from "../../components/utils/InformModal";
+import FormTipoExercicio from "../../components/exercicio/FormTipoExercicio";
+import { authHeader } from "../../services/authServices";
+
 
 const Alteracao = () => {
     const [inputs, setInputs] = useState({});
@@ -13,14 +15,18 @@ const Alteracao = () => {
     const [modal, setModal] = useState(undefined);
     const navigate = useNavigate();
 
-    const idAluno = useParams().id;
-    if (!idAluno) {
+    const idTipoExercicio = useParams().id;
+    if (!idTipoExercicio) {
         navigate("/listagem");
     }
 
     //https://github.com/jquense/yup
     const validator = yup.object().shape({
-        nome: yup.string().required("Nome é obrigatório.")
+        nome: yup.string().required("Nome é obrigatório."),
+        dataNascimento: yup.date().required("Data de nascimento é obrigatória."),
+        sexo: yup.string().oneOf(["M", "F", "O"], "Gênero está incorreto.").required("Gênero é obrigatório."),
+        email: yup.string().email("E-mail inválido.").required("E-mail é obrigatório."),
+        ativo: yup.boolean().required("Situação é obrigatória."),
     });
 
     function handleChange(event) {
@@ -37,7 +43,7 @@ const Alteracao = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .put(`http://localhost:8080/api/gruposmusculares/${idAluno}`, inputs)
+                    .put(`http://localhost:8080/api/tiposexercicios/${idTipoExercicio}`, inputs, { headers: authHeader() })
                     .then((response) => {
                         if (response.status === 200) {
                             modal.show();
@@ -59,15 +65,15 @@ const Alteracao = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/gruposmusculares");
+        navigate("/tiposexercicios");
     }
 
     useEffect(() => {
         const informModal = new bootstrap.Modal("#informModal", {});
         setModal(informModal);
-        setInputs({ ...inputs, id: idAluno });
+        setInputs({ ...inputs, id: idTipoExercicio });
         axios
-            .get(`http://localhost:8080/api/gruposmusculares/${idAluno}`)
+            .get(`http://localhost:8080/api/tiposexercicios/${idTipoExercicio}`)
             .then((response) => {
                 if (response.status === 200) {
                     setInputs(response.data);
@@ -100,13 +106,13 @@ const Alteracao = () => {
     return (
         <>
             <div className="d-flex justify-content-between align-items-center">
-                <h1>Alteração do Grupo Muscular</h1>
+                <h1>Alteração de Tipo de Exercícios</h1>
             </div>
             <hr />
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
-                <FormGrupoMuscular handleChange={handleChange} inputs={inputs} errors={errors} />
+                <FormTipoExercicio handleChange={handleChange} inputs={inputs} errors={errors} />
                 <div className="mt-3">
-                    <Link to="/gruposmusculares" className="btn btn-secondary me-1">
+                    <Link to="/tiposexercicios" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">
@@ -114,7 +120,7 @@ const Alteracao = () => {
                     </button>
                 </div>
             </form>
-            <InformModal info="Grupo Muscular alterado com sucesso!" action={closeModalAndRedirect} />
+            <InformModal info="Tipo de exercicio alterado com sucesso!" action={closeModalAndRedirect} />
         </>
     );
 };

@@ -6,6 +6,8 @@ import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FormAluno from "../../components/aluno/FormAluno";
 import InformModal from "../../components/utils/InformModal";
+import { authHeader } from "../../services/authServices";
+
 
 const Cadastro = () => {
     const [inputs, setInputs] = useState({});
@@ -44,7 +46,7 @@ const Cadastro = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .post("http://localhost:8080/api/alunos", inputs)
+                    .post("http://localhost:8080/api/alunos", inputs, { headers: authHeader() })
                     .then((response) => {
                         if (response.status === 201) {
                             modal.show();

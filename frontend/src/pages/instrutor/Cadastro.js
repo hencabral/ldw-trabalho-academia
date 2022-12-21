@@ -6,6 +6,8 @@ import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FormInstrutor from "../../components/instrutor/FormInstrutor";
 import InformModal from "../../components/utils/InformModal";
+import { authHeader } from "../../services/authServices";
+
 
 const Cadastro = () => {
     const [inputs, setInputs] = useState({});
@@ -37,7 +39,7 @@ const Cadastro = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .post("http://localhost:8080/api/instrutors", inputs)
+                    .post("http://localhost:8080/api/instrutores", inputs, { headers: authHeader() })
                     .then((response) => {
                         if (response.status === 201) {
                             modal.show();
@@ -59,7 +61,7 @@ const Cadastro = () => {
 
     function closeModalAndRedirect() {
         modal.hide();
-        navigate("/instrutors");
+        navigate("/instrutores");
     }
 
     useEffect(() => {
@@ -93,7 +95,7 @@ const Cadastro = () => {
             <form onSubmit={handleSubmit} noValidate autoComplete="off">
                 <FormInstrutor handleChange={handleChange} inputs={inputs} errors={errors} isNew={true} />
                 <div className="mt-3">
-                    <Link to="/instrutors" className="btn btn-secondary me-1">
+                    <Link to="/instrutores" className="btn btn-secondary me-1">
                         Cancelar
                     </Link>
                     <button type="submit" className="btn btn-primary">
