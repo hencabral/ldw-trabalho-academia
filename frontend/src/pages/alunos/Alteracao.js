@@ -6,6 +6,7 @@ import axios from "axios";
 import bootstrap from "bootstrap/dist/js/bootstrap.bundle.min.js";
 import FormAluno from "../../components/aluno/FormAluno";
 import InformModal from "../../components/utils/InformModal";
+import { authHeader } from "../../services/authServices";
 
 const Alteracao = () => {
     const [inputs, setInputs] = useState({});
@@ -49,7 +50,7 @@ const Alteracao = () => {
             .then(() => {
                 setErrors({});
                 axios
-                    .put(`http://localhost:8080/api/alunos/${idAluno}`, inputs)
+                    .put(`http://localhost:8080/api/alunos/${idAluno}`, inputs, { headers: authHeader() })
                     .then((response) => {
                         if (response.status === 200) {
                             modal.show();
@@ -79,7 +80,7 @@ const Alteracao = () => {
         setModal(informModal);
         setInputs({ ...inputs, id: idAluno });
         axios
-            .get(`http://localhost:8080/api/alunos/${idAluno}`)
+            .get(`http://localhost:8080/api/alunos/${idAluno}`, { headers: authHeader() })
             .then((response) => {
                 if (response.status === 200) {
                     setInputs(response.data);

@@ -15,7 +15,6 @@ const Listagem = () => {
         axios
             .get("http://localhost:8080/api/alunos", { headers: authHeader() })
             .then((response) => {
-                console.log(response.data);
                 setAlunos(response.data);
                 setLoading(false);
             })

@@ -73,7 +73,7 @@ const Alteracao = () => {
         setModal(informModal);
         setInputs({ ...inputs, id: idTipoExercicio });
         axios
-            .get(`http://localhost:8080/api/tiposexercicios/${idTipoExercicio}`)
+            .get(`http://localhost:8080/api/tiposexercicios/${idTipoExercicio}`, { headers: authHeader() })
             .then((response) => {
                 if (response.status === 200) {
                     setInputs(response.data);
